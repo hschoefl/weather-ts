@@ -44,7 +44,7 @@ function WeatherCard({
       </div>
       <p>{Math.round(temperature_2m_min)} °C</p>
       <p>{Math.round(temperature_2m_max)} °C</p>
-      {/* <p>{weather_code}</p> */}
+      <p>{weather_code}</p>
 
       {/* <p>⬆: {sunrise}</p> */}
       <Sunrise sunrise={convertGMTToLocalTime(sunrise)} />
