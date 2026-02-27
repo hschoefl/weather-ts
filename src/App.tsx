@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-480 h-200 bg-amber-200">
+      <div className="flex flex-col items-center justify-center w-screen h-screen">
         <WeatherContainer cityName={cityName} lat={parseFloat(lat)} lon={parseFloat(lon)} />
       </div>
     </>
