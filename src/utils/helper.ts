@@ -104,7 +104,7 @@ export function getGermanWeekday(date: Date): string {
   }
 
   return new Intl.DateTimeFormat("de-DE", {
-    weekday: "short",
+    weekday: "long",
   }).format(date);
 }
 

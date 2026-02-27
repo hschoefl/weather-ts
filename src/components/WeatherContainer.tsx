@@ -23,6 +23,7 @@ interface WeatherData {
   wind_speed_10m_max: number[];
   wind_direction_10m_dominant: [number];
   uv_index_max: [number];
+  relative_humidity_2m_max: [number];
 }
 
 function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
@@ -52,7 +53,7 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
   async function fetchWeatherByCoordinates(coordinates: Coordinates) {
     const URL = import.meta.env.VITE_WEATHER_URL;
 
-    const requestUrl = `${URL}?latitude=${coordinates.lat}&longitude=${coordinates.lon}&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant,uv_index_max&forecast_days=3&format=json`;
+    const requestUrl = `${URL}?latitude=${coordinates.lat}&longitude=${coordinates.lon}&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant,uv_index_max,relative_humidity_2m_max&forecast_days=3&format=json`;
     console.log(requestUrl);
 
     const response = await fetch(requestUrl);
@@ -68,6 +69,7 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
       wind_speed_10m_max: data.daily.wind_speed_10m_max,
       wind_direction_10m_dominant: data.daily.wind_direction_10m_dominant,
       uv_index_max: data.daily.uv_index_max,
+      relative_humidity_2m_max: data.daily.relative_humidity_2m_max,
     };
 
     console.log(weatherData);
@@ -87,8 +89,8 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <p className="text-4xl font-extrabold">{cityName}</p>
-      <div className="flex flex-row gap-3">
+      <p className="text-4xl font-extrabold mb-12">{cityName}</p>
+      <div className="flex flex-row gap-12">
         {weatherData &&
           weatherData.time.length > 0 &&
           weatherData.time.map((time, index) => (
@@ -103,6 +105,7 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
               wind_speed_10m_max={weatherData.wind_speed_10m_max[index]}
               wind_direction_10m_dominant={weatherData.wind_direction_10m_dominant[index]}
               uv_index_max={weatherData.uv_index_max[index]}
+              relative_humidity_2m_max={weatherData.relative_humidity_2m_max[index]}
             />
           ))}
       </div>
