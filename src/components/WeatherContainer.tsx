@@ -1,20 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { fetchWeatherByCoordinates, type Coordinates } from "../api/meteo";
+import { fetchWeatherByCoordinates, type Coordinates } from '../api/meteo'
 
-import WeatherCard from "./WeatherCard";
+import WeatherCard from './WeatherCard'
 
 interface WeatherContainerProps {
-  cityName: string;
-  lat: number;
-  lon: number;
+  cityName: string
+  lat: number
+  lon: number
 }
 
 function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
   const coordinates: Coordinates = {
     lat: lat,
     lon: lon,
-  };
+  }
 
   // const { data: coordinates } = useQuery({
   //   queryKey: ["coordinates", cityName],
@@ -22,15 +22,17 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
   // });
 
   const { data: weatherData } = useQuery({
-    queryKey: ["weather", cityName],
+    queryKey: ['weather', cityName],
     queryFn: () => fetchWeatherByCoordinates(coordinates!),
     enabled: !!coordinates,
-  });
+  })
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <p className="text-4xl font-extrabold mb-12">{cityName}</p>
-      <div className="flex flex-row gap-12">
+    <div className='flex flex-col items-center gap-2'>
+      <p className='text-4xl font-extrabold mb-12'>
+        3 Tages Prognose für {cityName}
+      </p>
+      <div className='flex flex-row gap-12'>
         {weatherData &&
           weatherData.time.length > 0 &&
           weatherData.time.map((time, index) => (
@@ -43,13 +45,17 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
               sunrise={weatherData.sunrise[index]}
               sunset={weatherData.sunset[index]}
               wind_speed_10m_max={weatherData.wind_speed_10m_max[index]}
-              wind_direction_10m_dominant={weatherData.wind_direction_10m_dominant[index]}
+              wind_direction_10m_dominant={
+                weatherData.wind_direction_10m_dominant[index]
+              }
               uv_index_max={weatherData.uv_index_max[index]}
-              relative_humidity_2m_max={weatherData.relative_humidity_2m_max[index]}
+              relative_humidity_2m_max={
+                weatherData.relative_humidity_2m_max[index]
+              }
             />
           ))}
       </div>
     </div>
-  );
+  )
 }
-export default WeatherContainer;
+export default WeatherContainer

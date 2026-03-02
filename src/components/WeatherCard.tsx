@@ -43,7 +43,7 @@ function WeatherCard({
   console.log(`col-span-2 bg-[${getUVIndexColor(uv_index_max)}]`)
 
   return (
-    <div className='flex flex-col border-2 border-gray-300 p-8 rounded-lg gap-2 shadow-2xl w-s max-w-s items-center'>
+    <div className='flex flex-col border-2 border-gray-300 p-8 rounded-lg gap-2 shadow-2xl w-s max-w-s items-center bg-white'>
       <p className='text-3xl font-semibold self-start'>
         {getGermanWeekday(new Date(time))}, {formatDateTTMMJJJJ(new Date(time))}
       </p>
@@ -53,17 +53,17 @@ function WeatherCard({
       </div>
 
       {/* Grid for values */}
-      <div className='grid grid-cols-2 gap-4 justify-items-left'>
+      <div className='grid grid-cols-2 gap-6 justify-items-left'>
         {/* Minimum temperature */}
         <div className='grid grid-cols-12 justify-items-start text-2xl'>
-          <p className='text-2xl col-span-3'>⬇️</p>
-          <p className='col-span-9'>{Math.round(temperature_2m_min)} °C</p>
+          <p className='text-2xl col-span-4'>⬇️</p>
+          <p className='col-span-8'>{Math.round(temperature_2m_min)} °C</p>
         </div>
 
         {/* Maximum temperature */}
         <div className='grid grid-cols-12 justify-items-start text-2xl'>
-          <p className='text-2xl col-span-3'>⬆️</p>
-          <p className='col-span-9'>{Math.round(temperature_2m_max)} °C</p>
+          <p className='text-2xl col-span-4'>⬆️</p>
+          <p className='col-span-8'>{Math.round(temperature_2m_max)} °C</p>
         </div>
 
         {/* Sunrise */}
@@ -71,9 +71,9 @@ function WeatherCard({
           <img
             src={imageSunrise}
             alt='sunrise icon'
-            className='w-6 h-6 col-span-3'
+            className='w-6 h-6 col-span-4'
           />
-          <p className='text-2xl col-span-9'>
+          <p className='text-2xl col-span-8'>
             {convertGMTToLocalTime(sunrise)} Uhr
           </p>
         </div>
@@ -83,43 +83,46 @@ function WeatherCard({
           <img
             src={imageSunset}
             alt='sunset icon'
-            className='w-6 h-6 col-span-3'
+            className='w-6 h-6 col-span-4'
           />
-          <p className='text-2xl col-span-9'>
+          <p className='text-2xl col-span-8'>
             {convertGMTToLocalTime(sunset)} Uhr
           </p>
         </div>
 
-        {/* Wind */}
+        {/* Wind Speed */}
         <div className='grid grid-cols-12 justify-items-start text-2xl'>
-          <img src={imageWind} alt='wind icon' className='w-8 h-8 col-span-3' />
-          <p className='text-2xl col-span-9'>{wind_speed_10m_max} km/h</p>
+          <img src={imageWind} alt='wind icon' className='w-8 h-8 col-span-4' />
+          <p className='text-2xl col-span-8'>{wind_speed_10m_max} km/h</p>
         </div>
 
+        {/* Wind Direction */}
         <div className='grid grid-cols-12 justify-items-start text-2xl'>
-          <p className='text-2xl col-span-3'>🧭</p>
-          <p className='col-span-9'>
+          <p className='text-2xl col-span-4'>🧭</p>
+          <p className='col-span-8'>
             {getWindDirection(wind_direction_10m_dominant)}
           </p>
         </div>
 
+        {/* Humidity */}
         <div className={`grid grid-cols-12 justify-items-start text-2xl`}>
           <img
             src={imageHumidity}
             alt='Humidity icon'
-            className='w-8 h-8 col-span-3'
+            className='w-8 h-8 col-span-4'
           />
-          <p className='text-2xl col-span-9'>{relative_humidity_2m_max} %</p>
+          <p className='text-2xl col-span-8'>{relative_humidity_2m_max} %</p>
         </div>
 
+        {/* UV Index  */}
         <div className={`grid grid-cols-12 justify-items-start text-2xl`}>
           <img
             src={imageUVIndex}
             alt='UV Index icon'
-            className='w-8 h-8 col-span-3'
+            className='w-8 h-8 col-span-4'
           />
           <p
-            className={`text-2xl rounded-2xl col-span-9 bg-[${getUVIndexColor(uv_index_max)}]`}
+            className={`text-2xl rounded-2xl col-span-8 bg-[${getUVIndexColor(uv_index_max)}]`}
           >
             {uv_index_max}
           </p>
