@@ -1,22 +1,26 @@
-import WeatherContainer from "./components/WeatherContainer";
+import WeatherContainer from './components/WeatherContainer'
 
 function App() {
-  const paramString = window.location.search;
-  const searchParams = new URLSearchParams(paramString);
-  const cityName = searchParams.get("cityName") || "Wien";
-  const lat = searchParams.get("lat") || "48.2082";
-  const lon = searchParams.get("lon") || "16.3738";
+  const paramString = window.location.search
+  const searchParams = new URLSearchParams(paramString)
+  const cityName = searchParams.get('cityName') || 'Wien'
+  const lat = searchParams.get('lat') || '48.2082'
+  const lon = searchParams.get('lon') || '16.3738'
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <WeatherContainer cityName={cityName} lat={parseFloat(lat)} lon={parseFloat(lon)} />
+      <div className='flex flex-col items-center justify-center w-screen h-screen bg-linear-to-b from-cyan-300 to-blue-300'>
+        <WeatherContainer
+          cityName={cityName}
+          lat={parseFloat(lat)}
+          lon={parseFloat(lon)}
+        />
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
 
 // GPS Koordinaten
 // Wien: 48.2082° N, 16.3738° E, http://localhost:5173/?cityName=Wien&lat=48.2082&lon=16.3738

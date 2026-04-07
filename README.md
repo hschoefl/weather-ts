@@ -5,3 +5,4 @@
 - Metatags einfügen, damit die Toolbar Elemente ausgeblendet werden
 - Powerded by einfügen (meteo)
 - aging vom Cache erhöhen
+- loading states für das Laden der Wetterdaten

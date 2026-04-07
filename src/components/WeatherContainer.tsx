@@ -21,15 +21,32 @@ function WeatherContainer({ cityName, lat, lon }: WeatherContainerProps) {
   //   queryFn: () => fetchCoordinatesByCityName(cityName),
   // });
 
-  const { data: weatherData } = useQuery({
+  const {
+    data: weatherData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["weather", cityName],
     queryFn: () => fetchWeatherByCoordinates(coordinates!),
     enabled: !!coordinates,
   });
 
+  // early returns if loading or error
+  if (isLoading) {
+    return <p className="text-3xl">Lade Wetterdaten ...</p>;
+  }
+
+  if (isError || !weatherData) {
+    return (
+      <p className="text-3xl">
+        Es tut uns leid. Die Wetterdaten können momentan nicht geladen werden. Bitte versuchen Sie es später erneut.
+      </p>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center gap-2">
-      <p className="text-4xl font-extrabold mb-12">{cityName}</p>
+      <p className="text-4xl font-extrabold mb-12">3 Tages Prognose für {cityName}</p>
       <div className="flex flex-row gap-12">
         {weatherData &&
           weatherData.time.length > 0 &&
