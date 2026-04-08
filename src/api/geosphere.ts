@@ -4,7 +4,8 @@ import type { Coordinates } from "./meteo";
 
 export async function fetchEnsembleForecastByCoordinates(coordinates: Coordinates) {
   const URL = import.meta.env.VITE_ENSEMBLE_FORECAST_URL;
-  const requestUrl = `${URL}?lat_lon=${coordinates.lat},${coordinates.lon}&parameters=tcc&output_format=geojson`;
+  const requestUrl = `${URL}?lat_lon=${coordinates.lat},${coordinates.lon}&parameters=tcc,t2m,mnt2m,mxt2m&output_format=geojson`;
+  console.log("Request URL: ", requestUrl);
   console.log(requestUrl);
 
   const response = await fetch(requestUrl);
@@ -14,7 +15,7 @@ export async function fetchEnsembleForecastByCoordinates(coordinates: Coordinate
   }
 
   const data = await response.json();
-  console.log(data.timestamps);
+  console.log(data.features);
 
   return data;
 }
